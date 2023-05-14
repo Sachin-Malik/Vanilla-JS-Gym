@@ -9,6 +9,12 @@ const ResetButtonButton = document.getElementById('reset');
 
 var countdownTimer = null;
 
+//Intialize
+(function () {
+    hour.value = "00";
+    minute.value = "00";
+    second.value = "00";
+})()
 
 function startTimer() {
     if (hour.value == 0 && minute.value == 0 && second.value == 0) return;
@@ -34,16 +40,16 @@ function timer() {
     };
     if (second.value != 0) {
         second.value -= 1;
-        if (second.value < 10) second.value = 0 + second.value;
+        styleFormat(second);
     } else if (second.value == 0 && minute.value != 0) {
         second.value = 59;
         minute.value -= 1;
-        if (minute.value < 10) minute.value = 0 + minute.value;
+        styleFormat(minute);
     } else if (minute.value == 0 && hour.value != 0) {
-        hour.value -= 1;
-        if (hour.value < 10) hour.value = 0 + hour.value;
         minute.value = 59;
         second.value = 59;
+        hour.value -= 1;
+        styleFormat(hour);
     }
 }
 
@@ -59,4 +65,8 @@ function handleReset() {
     hour.value = "00";
     minute.value = "00";
     second.value = "00";
+}
+
+function styleFormat(time) {
+    if (time.value < 10) time.value = 0 + time.value;
 }
